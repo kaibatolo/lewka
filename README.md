@@ -49,7 +49,7 @@ See [GUIDELINES.md](./GUIDELINES.md) for consent/quality (muli) notes and Venice
 | POST | `/search` | FTS5 + filters |
 | GET | `/item/{id}` | Fetch one item |
 | DELETE | `/item/{id}` | Delete metadata row |
-| GET | `/sources` | Allowlisted sources |
+| GET | `/sources` | Connectors + weighted catalog (`?niches=goth,ffm`) |
 | POST | `/expand` | NL → tags stub |
 | POST | `/score` | Rubric stub; optional persist |
 | POST | `/critique` | Store critique request (no Venice call) |
@@ -69,6 +69,13 @@ curl -s -X POST http://127.0.0.1:8000/ingest -H 'Content-Type: application/json'
   "connector": "manual_url"
 }'
 ```
+
+
+## Site catalog + weighting
+
+Allowlisted adult discovery sources live in [`catalog/sites.yaml`](./catalog/sites.yaml) (mina-ranked seed for goth/egirl/FFM/cuckquean). Ranking boost formula and hard rules are documented in [`catalog/WEIGHTING.md`](./catalog/WEIGHTING.md).
+
+`GET /sources?niches=goth,ffm,cuckquean` returns connector stubs plus catalog cards with computed `niche_fit` and `weight`. Metadata + outbound links only.
 
 ## Tests
 

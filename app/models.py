@@ -110,3 +110,26 @@ class HealthResponse(BaseModel):
     status: str
     service: str = "lewka"
     policy: str = "metadata-only; 18+ gated; allowlisted connectors"
+
+
+class CatalogEntryOut(BaseModel):
+    id: str
+    name: str
+    url: str
+    kinds: list[str]
+    niches: list[str]
+    age_floor: int
+    age_gate_clarity: float
+    signal_to_noise: float
+    metadata_richness: float
+    indexability: float
+    spam_risk: float
+    notes: str = ""
+    enabled: bool = True
+    niche_fit: float
+    weight: float
+
+
+class SourcesResponse(BaseModel):
+    connectors: list[SourceOut]
+    catalog: list[CatalogEntryOut]
