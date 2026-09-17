@@ -55,7 +55,7 @@ Account ID is read from `CLOUDFLARE_ACCOUNT_ID` or wrangler login / `wrangler.to
 
 1. In Cloudflare Dashboard → Workers & Pages → **kaibau-gateway** → Triggers → Custom Domains → add `api.kaibau.com`.
 2. Or uncomment `routes` in `wrangler.toml` and redeploy (zone must be `kaibau.com` on the same account).
-3. DNS: ensure `api` is proxied (orange cloud) on zone **kaibau.com`.
+3. DNS: ensure `api` is proxied (orange cloud) on zone **kaibau.com**.
 
 ## Example request
 
