@@ -1,0 +1,6 @@
+# Copy to .dev.vars for local wrangler dev — NEVER commit real values
+VENICE_API_KEY=
+FEATHERLESS_API_KEY=
+XAI_API_KEY=
+SUPABASE_URL=
+SUPABASE_SERVICE_ROLE=

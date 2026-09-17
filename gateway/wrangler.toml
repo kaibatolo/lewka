@@ -1,0 +1,20 @@
+name = "kaibau-gateway"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# Custom domain (configure in dashboard or via wrangler after zone DNS):
+# routes = [
+#   { pattern = "api.kaibau.com/*", zone_name = "kaibau.com" }
+# ]
+
+[vars]
+GATEWAY_NAME = "kaibau-gateway"
+# Non-secret defaults only. Set secrets via: wrangler secret put <NAME>
+# VENICE_API_KEY, FEATHERLESS_API_KEY, XAI_API_KEY
+# SUPABASE_URL, SUPABASE_SERVICE_ROLE (optional memory)
+
+# Optional R2 binding for agent memory/config objects (metadata/config — not media hosting mandate)
+# [[r2_buckets]]
+# binding = "VAULT"
+# bucket_name = "kaiba-vault"

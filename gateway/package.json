@@ -1,0 +1,17 @@
+{
+  "name": "kaibau-gateway",
+  "version": "0.1.0",
+  "private": true,
+  "description": "OpenAI-compatible lewd gateway Worker — routes venice/featherless/grok with 18+ hard rules",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^3.78.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
