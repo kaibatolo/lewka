@@ -1,0 +1,571 @@
+# lewka allowlisted adult discovery sources — metadata-only cards (no file hosting).
+# Seeded from mina ranked top-20 (goth/egirl/mean FFM/cuckquean) plus user-liked
+# first-party tubes. Prefer first-party over link farms. See WEIGHTING.md.
+# Sites only — never ingest individual video URLs as sources.
+
+sites:
+- id: burningangel
+  name: BurningAngel
+  url: https://www.burningangel.com
+  kinds:
+  - video
+  niches:
+  - goth
+  - egirl
+  - alt
+  - fetish
+  - ffm
+  age_floor: 18
+  age_gate_clarity: 0.92
+  signal_to_noise: 0.88
+  metadata_richness: 0.75
+  indexability: 0.45
+  spam_risk: 0.15
+  notes: "Joanna Angel / alt-goth studio flagship; strong goth+tattoo fit; paid outbound."
+  enabled: true
+- id: clips4sale
+  name: Clips4Sale
+  url: https://www.clips4sale.com
+  kinds:
+  - video
+  niches:
+  - fetish
+  - cuckquean
+  - ffm
+  - goth
+  - egirl
+  age_floor: 18
+  age_gate_clarity: 0.9
+  signal_to_noise: 0.78
+  metadata_richness: 0.8
+  indexability: 0.5
+  spam_risk: 0.22
+  notes: "Niche studio marketplace; excellent fetish/cuckquean taxonomy; metadata-friendly."
+  enabled: true
+- id: manyvids
+  name: ManyVids
+  url: https://www.manyvids.com
+  kinds:
+  - video
+  - audio
+  - image
+  niches:
+  - goth
+  - egirl
+  - ffm
+  - cuckquean
+  - fetish
+  age_floor: 18
+  age_gate_clarity: 0.92
+  signal_to_noise: 0.8
+  metadata_richness: 0.85
+  indexability: 0.55
+  spam_risk: 0.2
+  notes: "Creator storefront; strong niche/fetish tags for goth/egirl/FFM; clips outbound only."
+  enabled: true
+- id: pornhub
+  name: Pornhub
+  url: https://www.pornhub.com
+  kinds:
+  - video
+  niches:
+  - general
+  - goth
+  - egirl
+  - ffm
+  age_floor: 18
+  age_gate_clarity: 0.9
+  signal_to_noise: 0.55
+  metadata_richness: 0.75
+  indexability: 0.45
+  spam_risk: 0.45
+  notes: "Mainstream tube; clear 18+ gate; mixed S/N; ToS limits bulk indexing."
+  enabled: true
+- id: xvideos
+  name: XVideos
+  url: https://www.xvideos.com
+  kinds:
+  - video
+  niches:
+  - general
+  - ffm
+  - goth
+  age_floor: 18
+  age_gate_clarity: 0.85
+  signal_to_noise: 0.5
+  metadata_richness: 0.6
+  indexability: 0.4
+  spam_risk: 0.5
+  notes: "Large tube; age wall present; noisier tags; no public metadata API."
+  enabled: true
+- id: adulttime
+  name: Adult Time
+  url: https://www.adulttime.com
+  kinds:
+  - video
+  niches:
+  - general
+  - romance
+  - ffm
+  - fetish
+  age_floor: 18
+  age_gate_clarity: 0.93
+  signal_to_noise: 0.82
+  metadata_richness: 0.8
+  indexability: 0.5
+  spam_risk: 0.18
+  notes: "Premium network (incl. ethical/alt brands); strong age KYC; paid outbound."
+  enabled: true
+- id: spankbang
+  name: SpankBang
+  url: https://spankbang.com
+  kinds:
+  - video
+  niches:
+  - general
+  - goth
+  - ffm
+  age_floor: 18
+  age_gate_clarity: 0.88
+  signal_to_noise: 0.68
+  metadata_richness: 0.65
+  indexability: 0.4
+  spam_risk: 0.35
+  notes: "User-preferred first-party tube; catalog site only — never per-clip sources."
+  enabled: true
+- id: xhamster
+  name: xHamster
+  url: https://xhamster.com
+  kinds:
+  - video
+  - image
+  niches:
+  - general
+  - ffm
+  - cuckquean
+  - goth
+  age_floor: 18
+  age_gate_clarity: 0.88
+  signal_to_noise: 0.6
+  metadata_richness: 0.7
+  indexability: 0.4
+  spam_risk: 0.4
+  notes: "User-preferred first-party tube; community categories; site-level cards only."
+  enabled: true
+- id: perfectgirlfriend
+  name: Perfect Girlfriend / Alex Adams
+  url: https://www.perfectgirlfriend.com
+  kinds:
+  - audio
+  - video
+  niches:
+  - romance
+  - egirl
+  - fetish
+  - cuckquean
+  age_floor: 18
+  age_gate_clarity: 0.9
+  signal_to_noise: 0.9
+  metadata_richness: 0.7
+  indexability: 0.4
+  spam_risk: 0.1
+  notes: "Alex Adams / PG audio-heavy mean-GF / JOI style; high S/N for egirl/romance lanes."
+  enabled: true
+- id: fansly
+  name: Fansly
+  url: https://fansly.com
+  kinds:
+  - mixed
+  niches:
+  - egirl
+  - goth
+  - fetish
+  - general
+  age_floor: 18
+  age_gate_clarity: 0.94
+  signal_to_noise: 0.72
+  metadata_richness: 0.4
+  indexability: 0.2
+  spam_risk: 0.28
+  notes: "Creator platform; clearer adult tooling than OF in places; indexing still hostile."
+  enabled: true
+- id: onlyfans
+  name: OnlyFans
+  url: https://onlyfans.com
+  kinds:
+  - mixed
+  niches:
+  - egirl
+  - goth
+  - general
+  - romance
+  age_floor: 18
+  age_gate_clarity: 0.95
+  signal_to_noise: 0.7
+  metadata_richness: 0.35
+  indexability: 0.15
+  spam_risk: 0.3
+  notes: "Strong age KYC; discovery/indexing hostile — profile cards + outbound only."
+  enabled: true
+- id: iwantclips
+  name: IWantClips
+  url: https://iwantclips.com
+  kinds:
+  - video
+  niches:
+  - fetish
+  - cuckquean
+  - egirl
+  - goth
+  age_floor: 18
+  age_gate_clarity: 0.9
+  signal_to_noise: 0.75
+  metadata_richness: 0.7
+  indexability: 0.45
+  spam_risk: 0.25
+  notes: "Creator clip store; fetish niches incl. cuckquean-adjacent; paid outbound."
+  enabled: true
+- id: evilangel
+  name: Evil Angel
+  url: https://www.evilangel.com
+  kinds:
+  - video
+  niches:
+  - general
+  - fetish
+  - ffm
+  age_floor: 18
+  age_gate_clarity: 0.92
+  signal_to_noise: 0.8
+  metadata_richness: 0.75
+  indexability: 0.45
+  spam_risk: 0.18
+  notes: "Classic gonzo/prestige studio network; clear adult gate; paid site."
+  enabled: true
+- id: missax
+  name: MissaX
+  url: https://missax.com
+  kinds:
+  - video
+  niches:
+  - romance
+  - fetish
+  - cuckquean
+  - ffm
+  age_floor: 18
+  age_gate_clarity: 0.92
+  signal_to_noise: 0.88
+  metadata_richness: 0.78
+  indexability: 0.45
+  spam_risk: 0.12
+  notes: "Narrative/taboo-romance studio; strong cuckquean/mean-GF adjacent storytelling."
+  enabled: true
+- id: audiodesires
+  name: Audiodesires
+  url: https://www.audiodesires.com
+  kinds:
+  - audio
+  niches:
+  - romance
+  - egirl
+  - fetish
+  - ffm
+  age_floor: 18
+  age_gate_clarity: 0.9
+  signal_to_noise: 0.92
+  metadata_richness: 0.8
+  indexability: 0.5
+  spam_risk: 0.1
+  notes: "Scripted erotic audio; high S/N; clear 18+; good romance/egirl lane coverage."
+  enabled: true
+- id: literotica
+  name: Literotica
+  url: https://www.literotica.com
+  kinds:
+  - text
+  - audio
+  niches:
+  - romance
+  - ffm
+  - cuckquean
+  - fetish
+  - general
+  age_floor: 18
+  age_gate_clarity: 0.9
+  signal_to_noise: 0.82
+  metadata_richness: 0.8
+  indexability: 0.6
+  spam_risk: 0.15
+  notes: "Long-running erotica library; category tree maps well to FFM/cuckquean."
+  enabled: true
+- id: reddit_nsfw
+  name: Reddit niche aggregate
+  url: https://www.reddit.com
+  kinds:
+  - mixed
+  niches:
+  - goth
+  - egirl
+  - ffm
+  - cuckquean
+  - fetish
+  - romance
+  - general
+  age_floor: 18
+  age_gate_clarity: 0.75
+  signal_to_noise: 0.45
+  metadata_richness: 0.7
+  indexability: 0.55
+  spam_risk: 0.55
+  notes: "over_18 niche subs only (goth/egirl/FFM/cuckquean); high coverage, spam risk; API ToS."
+  enabled: true
+- id: iafd
+  name: IAFD
+  url: https://www.iafd.com
+  kinds:
+  - mixed
+  niches:
+  - general
+  - goth
+  - ffm
+  age_floor: 18
+  age_gate_clarity: 0.85
+  signal_to_noise: 0.85
+  metadata_richness: 0.95
+  indexability: 0.7
+  spam_risk: 0.1
+  notes: "Internet Adult Film Database — performer/studio metadata enrichment, not a tube."
+  enabled: true
+- id: alterotic
+  name: AltErotic
+  url: https://alterotic.com
+  kinds:
+  - video
+  niches:
+  - goth
+  - alt
+  - egirl
+  - fetish
+  age_floor: 18
+  age_gate_clarity: 0.9
+  signal_to_noise: 0.86
+  metadata_richness: 0.72
+  indexability: 0.42
+  spam_risk: 0.15
+  notes: "Alt/goth erotic studio brand; strong tattoo/alt aesthetic fit."
+  enabled: true
+- id: teamskeet
+  name: TeamSkeet
+  url: https://www.teamskeet.com
+  kinds:
+  - video
+  niches:
+  - general
+  - egirl
+  - ffm
+  age_floor: 18
+  age_gate_clarity: 0.92
+  signal_to_noise: 0.7
+  metadata_richness: 0.7
+  indexability: 0.45
+  spam_risk: 0.25
+  notes: "Large network/tube-adjacent premium; egirl-adjacent casting; paid outbound."
+  enabled: true
+- id: beeg
+  name: Beeg
+  url: https://beeg.com
+  kinds:
+  - video
+  niches:
+  - general
+  - ffm
+  - egirl
+  age_floor: 18
+  age_gate_clarity: 0.82
+  signal_to_noise: 0.58
+  metadata_richness: 0.55
+  indexability: 0.4
+  spam_risk: 0.35
+  notes: "First-party tube; cleaner UI than mega-tubes; user-liked discovery source."
+  enabled: true
+- id: hqporner
+  name: HQPorner
+  url: https://hqporner.com
+  kinds:
+  - video
+  niches:
+  - general
+  - goth
+  - ffm
+  age_floor: 18
+  age_gate_clarity: 0.8
+  signal_to_noise: 0.65
+  metadata_richness: 0.5
+  indexability: 0.35
+  spam_risk: 0.3
+  notes: "HQ-focused tube; first-party prefer over scrapers; user-liked."
+  enabled: true
+- id: mygothgf
+  name: MyGothGF
+  url: https://mygothgf.com
+  kinds:
+  - video
+  niches:
+  - goth
+  - egirl
+  - alt
+  - fetish
+  age_floor: 18
+  age_gate_clarity: 0.9
+  signal_to_noise: 0.9
+  metadata_richness: 0.7
+  indexability: 0.4
+  spam_risk: 0.12
+  notes: "HIGH niche_fit for goth/egirl; studio/network first-party; mina-lane priority."
+  enabled: true
+- id: pussyspace
+  name: PussySpace
+  url: https://www.pussyspace.com
+  kinds:
+  - video
+  niches:
+  - general
+  - ffm
+  - egirl
+  age_floor: 18
+  age_gate_clarity: 0.8
+  signal_to_noise: 0.55
+  metadata_richness: 0.5
+  indexability: 0.35
+  spam_risk: 0.4
+  notes: "Tube/discovery; user-liked; prefer over link farms."
+  enabled: true
+- id: erome
+  name: Erome
+  url: https://www.erome.com
+  kinds:
+  - image
+  - video
+  - mixed
+  niches:
+  - general
+  - egirl
+  - goth
+  - fetish
+  age_floor: 18
+  age_gate_clarity: 0.7
+  signal_to_noise: 0.45
+  metadata_richness: 0.4
+  indexability: 0.35
+  spam_risk: 0.5
+  notes: "User albums/galleries; mixed S/N; age-gate clarity uneven — verify carefully on ingest."
+  enabled: true
+- id: eporner
+  name: Eporner
+  url: https://www.eporner.com
+  kinds:
+  - video
+  niches:
+  - general
+  - ffm
+  - goth
+  age_floor: 18
+  age_gate_clarity: 0.85
+  signal_to_noise: 0.62
+  metadata_richness: 0.65
+  indexability: 0.45
+  spam_risk: 0.32
+  notes: "Tube with decent search; often cleaner metadata than junk farms; user-requested."
+  enabled: true
+- id: xpaja
+  name: Xpaja
+  url: https://www.xpaja.net
+  kinds:
+  - video
+  - image
+  niches:
+  - general
+  - ffm
+  age_floor: 18
+  age_gate_clarity: 0.72
+  signal_to_noise: 0.48
+  metadata_richness: 0.45
+  indexability: 0.3
+  spam_risk: 0.55
+  notes: "ES-language amateur tube (xpaja.net verified); ad-heavy; mid spam_risk — not a link farm but not premium."
+  enabled: true
+- id: sxyprn
+  name: sxyprn
+  url: https://sxyprn.com
+  kinds:
+  - video
+  niches:
+  - general
+  age_floor: 18
+  age_gate_clarity: 0.65
+  signal_to_noise: 0.35
+  metadata_richness: 0.3
+  indexability: 0.2
+  spam_risk: 0.75
+  notes: "CAUTION — scrape/aggregator-style; high spam_risk; low indexability; outbound card only."
+  enabled: true
+- id: hqpornsearch
+  name: HQPornSearch
+  url: https://hqpornsearch.com
+  kinds:
+  - video
+  niches:
+  - general
+  age_floor: 18
+  age_gate_clarity: 0.6
+  signal_to_noise: 0.3
+  metadata_richness: 0.25
+  indexability: 0.15
+  spam_risk: 0.8
+  notes: "CAUTION — search/scrape aggregator; prefer hqporner/beeg first-party instead."
+  enabled: true
+- id: xoxporn
+  name: XoxPorn
+  url: https://xoxporn.com
+  kinds:
+  - video
+  niches:
+  - general
+  age_floor: 18
+  age_gate_clarity: 0.6
+  signal_to_noise: 0.28
+  metadata_richness: 0.25
+  indexability: 0.15
+  spam_risk: 0.82
+  notes: "CAUTION — link-farm/scrape feel; low weight by design."
+  enabled: true
+- id: pornbaker
+  name: PornBaker
+  url: https://pornbaker.com
+  kinds:
+  - video
+  niches:
+  - general
+  age_floor: 18
+  age_gate_clarity: 0.58
+  signal_to_noise: 0.3
+  metadata_richness: 0.25
+  indexability: 0.15
+  spam_risk: 0.78
+  notes: "CAUTION — aggregator/directory-adjacent; prefer first-party tubes."
+  enabled: true
+- id: thepornlinks
+  name: ThePornLinks
+  url: https://thepornlinks.com
+  kinds:
+  - mixed
+  niches:
+  - general
+  age_floor: 18
+  age_gate_clarity: 0.55
+  signal_to_noise: 0.2
+  metadata_richness: 0.2
+  indexability: 0.1
+  spam_risk: 0.85
+  notes: "Directory/link farm — disabled by default; notes-only reference, not ranking seed."
+  enabled: false
