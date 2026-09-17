@@ -13,8 +13,6 @@ def test_niche_fit_neutral_and_overlap():
 
 
 def test_compute_weight_formula():
-    # All mid/neutral: niche_fit=0.5, others 0.5, spam_risk=0.5 →
-    # 0.25*0.5 + 0.20*0.5 + 0.20*0.5 + 0.15*0.5 + 0.15*0.5 + 0.05*0.5 = 0.5 → 50
     w = compute_weight(
         niche_fit_value=0.5,
         signal_to_noise=0.5,
@@ -25,7 +23,6 @@ def test_compute_weight_formula():
     )
     assert w == 50.0
 
-    # Perfect niche + strong scores, zero spam
     w2 = compute_weight(
         niche_fit_value=1.0,
         signal_to_noise=1.0,
@@ -46,7 +43,6 @@ def test_parse_niches_param():
 def test_weighted_catalog_mina_seed():
     rows = weighted_catalog(["goth", "egirl", "ffm", "cuckquean"])
     ids = {r["id"] for r in rows}
-    # mina top-20 seed must be present
     for expected in (
         "burningangel",
         "clips4sale",
@@ -71,15 +67,22 @@ def test_weighted_catalog_mina_seed():
     ):
         assert expected in ids, expected
     assert len(rows) >= 20
-    # sorted by weight desc
     weights = [r["weight"] for r in rows]
     assert weights == sorted(weights, reverse=True)
-    # niche leaders should outrank generic tubes on this query
     by_id = {r["id"]: r for r in rows}
     assert by_id["burningangel"]["niche_fit"] >= 0.5
     assert by_id["burningangel"]["weight"] > by_id["xvideos"]["weight"]
-    # user-liked first-party + cautious aggregators
-    for liked in ("beeg", "hqporner", "mygothgf", "pussyspace", "spankbang", "xhamster", "erome", "eporner", "xpaja"):
+    for liked in (
+        "beeg",
+        "hqporner",
+        "mygothgf",
+        "pussyspace",
+        "spankbang",
+        "xhamster",
+        "erome",
+        "eporner",
+        "xpaja",
+    ):
         assert liked in ids, liked
     for caution in ("sxyprn", "hqpornsearch", "xoxporn", "pornbaker"):
         assert caution in ids, caution
@@ -96,7 +99,6 @@ def test_sources_endpoint_with_niches(client):
     assert "connectors" in body and "catalog" in body
     assert len(body["connectors"]) >= 1
     assert len(body["catalog"]) >= 20
-    # neutral niche_fit when no niches param
     assert all(abs(c["niche_fit"] - 0.5) < 1e-6 for c in body["catalog"])
 
     r2 = client.get("/sources", params={"niches": "goth,ffm,cuckquean"})
@@ -104,9 +106,7 @@ def test_sources_endpoint_with_niches(client):
     cat = r2.json()["catalog"]
     assert len(cat) >= 20
     assert all("weight" in c and "niche_fit" in c for c in cat)
-    # burningangel / clips4sale should appear with positive niche_fit
     by_id = {c["id"]: c for c in cat}
     assert by_id["burningangel"]["niche_fit"] > 0.0
     assert by_id["clips4sale"]["niche_fit"] >= 0.5
-    # still sorted by weight
     assert [c["weight"] for c in cat] == sorted((c["weight"] for c in cat), reverse=True)
