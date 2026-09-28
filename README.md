@@ -2,12 +2,14 @@
 
 This repo **is** Lewka. Search, gallery, catalog, ingest API.
 
+Public host: **https://lewka.kaibau.com**
+
 - UI: [`web/`](./web) — vault search + filtered gallery
 - API: [`app/`](./app) — FastAPI metadata index (SQLite FTS5)
 - Catalog: [`catalog/sites.yaml`](./catalog/sites.yaml)
-- Live tiles today: vault edge `GET /v1/search?q=` and `GET /v1/gallery?filter=`
+- Live tiles: vault edge `GET /v1/search?q=` and `GET /v1/gallery?filter=`
 
-Host intent: `lewka.kaibau.com` or `kaibau.com/lewka` mounting this UI. Not `app.kaibau.com` (that host does not exist).
+`app.kaibau.com` does not exist. Do not link it. Marketing `kaibau.com/lewka` is a bounce to this host, not the product.
 
 > Metadata + outbound links only. No binaries. 18+ hard gate. Not a pirate host.
 
@@ -22,10 +24,20 @@ npm run dev
 Talks to origin:
 `https://emeptptdtcgeliiizxry.supabase.co/functions/v1/kaibau`
 
-- `/` search (goth / egirl / ffm / pov / alt)
+- `/` search (placeholder **lewka search**, CTA **Open Lewka**)
 - `/gallery` lanes `goth white egirl ffm college-slut`
 
 `api.kaibau.com/v1` is 404. Do not use `/v1/gallery/:filter`.
+
+## Deploy (lewka.kaibau.com)
+
+```bash
+cd web
+npm install
+npm run deploy
+```
+
+Wrangler config: `web/wrangler.jsonc` — Worker name `lewka`, custom domain `lewka.kaibau.com`, SPA assets from `web/dist`. Zone `kaibau.com` must be on the same Cloudflare account. DNS for `lewka` is created by `custom_domain: true` on first successful deploy.
 
 ## Local metadata API
 
