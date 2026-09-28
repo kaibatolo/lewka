@@ -1,8 +1,11 @@
 {
-  // Must match Workers & Pages project name (Settings → Builds).
+  // Must match Workers & Pages project name: kaibau-lewka
   "name": "kaibau-lewka",
   "compatibility_date": "2026-09-26",
   "workers_dev": true,
+  "build": {
+    "command": "npm install && npm run build"
+  },
   "assets": {
     "directory": "./dist",
     "not_found_handling": "single-page-application"
