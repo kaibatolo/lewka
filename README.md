@@ -4,6 +4,8 @@ This repo **is** Lewka. Search, gallery, catalog, ingest API.
 
 Public host: **https://lewka.kaibau.com**
 
+Cloudflare project: **kaibau-lewka** (Workers & Pages). Git: `kaibatolo/lewka`. Root directory: `/web`.
+
 - UI: [`web/`](./web) — vault search + filtered gallery
 - API: [`app/`](./app) — FastAPI metadata index (SQLite FTS5)
 - Catalog: [`catalog/sites.yaml`](./catalog/sites.yaml)
@@ -31,13 +33,25 @@ Talks to origin:
 
 ## Deploy (lewka.kaibau.com)
 
+`web/wrangler.jsonc` name is `kaibau-lewka` so it matches the dashboard Worker. Custom domain `lewka.kaibau.com`.
+
+Dashboard Builds should be:
+
+| Field | Value |
+| --- | --- |
+| Git repository | `kaibatolo/lewka` |
+| Root directory | `/web` |
+| Branch | `main` |
+| Build command | `npm ci && npm run build` |
+| Deploy command | `npx wrangler deploy` |
+
+Build command cannot stay `None` — `wrangler deploy` ships `web/dist`. No dist, empty Worker.
+
 ```bash
 cd web
 npm install
 npm run deploy
 ```
-
-Wrangler config: `web/wrangler.jsonc` — Worker name `lewka`, custom domain `lewka.kaibau.com`, SPA assets from `web/dist`. Zone `kaibau.com` must be on the same Cloudflare account. DNS for `lewka` is created by `custom_domain: true` on first successful deploy.
 
 ## Local metadata API
 

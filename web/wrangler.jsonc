@@ -1,6 +1,7 @@
 {
-  "name": "lewka",
-  "compatibility_date": "2026-09-28",
+  // Must match Workers & Pages project name (Settings → Builds).
+  "name": "kaibau-lewka",
+  "compatibility_date": "2026-09-26",
   "workers_dev": true,
   "assets": {
     "directory": "./dist",
