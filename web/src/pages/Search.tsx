@@ -1,12 +1,11 @@
 import { useRef, useState, type FormEvent } from "react";
 import { search, type Item } from "../lib/api";
-
-const HINTS = ["goth", "egirl", "ffm", "pov", "alt"] as const;
+import { LEWKA_TAGS } from "../lib/tags";
 
 export function SearchPage() {
   const [q, setQ] = useState("");
   const [items, setItems] = useState<Item[]>([]);
-  const [note, setNote] = useState("Adult index. Type a lane and open Lewka.");
+  const [note, setNote] = useState("Adult index. 62 tags live. Type a lane and open Lewka.");
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -58,8 +57,8 @@ export function SearchPage() {
           </button>
         </div>
         <div className="tags">
-          {HINTS.map((h) => (
-            <button key={h} type="button" className="tag" onClick={() => void run(h)}>
+          {LEWKA_TAGS.map((h) => (
+            <button key={h} type="button" className={q === h ? "tag on" : "tag"} onClick={() => void run(h)}>
               {h}
             </button>
           ))}
