@@ -1,10 +1,10 @@
 :root {
-  --void: #07060c;
+  --void: #071018;
   --ink: #efe6d6;
   --navy: #12203a;
   --pink: #e38aa8;
   --muted: #9aa6bc;
-  --glass: rgba(18, 32, 58, 0.55);
+  --glass: rgba(12, 18, 28, 0.55);
 }
 * { box-sizing: border-box; }
 html, body, #root {
@@ -14,25 +14,23 @@ html, body, #root {
   background: var(--void);
   font: 16px/1.45 "Iowan Old Style", "Palatino Linotype", Palatino, serif;
 }
-.ambient {
+.water {
   position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   z-index: 0;
   pointer-events: none;
-  filter: saturate(0.7) brightness(0.45);
 }
-.ambient.paused { opacity: 0.18; }
+.water.paused { filter: brightness(0.55); }
 .shell { position: relative; z-index: 1; min-height: 100vh; }
 .shell::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
-  background: radial-gradient(1200px 700px at 12% -10%, rgba(227,138,168,0.16), transparent 55%), rgba(7,6,12,0.35);
+  background: radial-gradient(900px 500px at 50% 42%, rgba(7,16,24,0.08), rgba(7,16,24,0.55));
 }
 a { color: var(--ink); }
 header {
