@@ -65,9 +65,9 @@ export function federate(items: Item[], limit = 24, cap = SOURCE_CAP): Item[] {
   return out;
 }
 
-export async function federatedSearch(q: string, limit = 24) {
+export async function federatedSearch(q: string, limit = 24, extra: string[] = []) {
   const listed = await sources().catch(() => ({ sources: ["danbooru", "eporner"] }));
-  const names = [...new Set([...(listed.sources || []), "rule34"])];
+  const names = [...new Set([...(listed.sources || []), "rule34", ...extra])];
   const pages = await Promise.all([
     ...names.map((name) => search(q, Math.max(40, limit * 2), name).catch(() => ({ items: [] as Item[] }))),
     rule34(q, 24).then((items) => ({ items })).catch(() => ({ items: [] as Item[] })),
