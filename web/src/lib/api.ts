@@ -1,3 +1,5 @@
+import { epornerApi, rule34 } from "./native";
+
 export const ORIGIN_API =
   "https://emeptptdtcgeliiizxry.supabase.co/functions/v1/kaibau";
 
@@ -65,22 +67,24 @@ export function federate(items: Item[], limit = 24, cap = SOURCE_CAP): Item[] {
 
 export async function federatedSearch(q: string, limit = 24) {
   const listed = await sources().catch(() => ({ sources: ["danbooru", "eporner"] }));
-  const names = listed.sources?.length ? listed.sources : ["danbooru", "eporner"];
-  const pages = await Promise.all(
-    names.map((name) => search(q, Math.max(40, limit * 2), name).catch(() => ({ items: [] as Item[], sources: [name] }))),
-  );
+  const names = [...new Set([...(listed.sources || []), "rule34"])];
+  const pages = await Promise.all([
+    ...names.map((name) => search(q, Math.max(40, limit * 2), name).catch(() => ({ items: [] as Item[] }))),
+    rule34(q, 24).then((items) => ({ items })).catch(() => ({ items: [] as Item[] })),
+    epornerApi(q, 24).then((items) => ({ items })).catch(() => ({ items: [] as Item[] })),
+  ]);
   const pool: Item[] = [];
   const seen = new Set<string>();
   for (const page of pages) {
     for (const item of page.items || []) {
-      if (seen.has(item.id)) continue;
+      if (!item?.id || seen.has(item.id)) continue;
       seen.add(item.id);
       pool.push(item);
     }
   }
   return {
     items: federate(pool, limit),
-    sources: names,
+    sources: [...new Set(pool.map((i) => i.source))],
     pooled: pool.length,
   };
 }
