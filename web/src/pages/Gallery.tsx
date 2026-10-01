@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { LANES, gallery, type Item } from "../lib/api";
+import { Player } from "./Player";
 
 export function GalleryPage() {
   const [lane, setLane] = useState<string>(LANES[0]);
   const [items, setItems] = useState<Item[]>([]);
   const [note, setNote] = useState("warming");
+  const [active, setActive] = useState<Item | null>(null);
 
   useEffect(() => {
     let live = true;
@@ -38,13 +40,15 @@ export function GalleryPage() {
       </div>
       <div className="grid">
         {items.map((item) => (
-          <a key={item.id} className="tile" href={item.url} target="_blank" rel="noopener noreferrer">
+          <button key={item.id} type="button" className="tile" onClick={() => setActive(item)}>
             {item.thumb ? <img src={item.thumb} alt="" /> : <div className="ph" />}
+            {item.kind === "video" || item.source === "eporner" ? <span className="play">play</span> : null}
             <p>{item.source}</p>
             <h3>{(item.title || item.id).slice(0, 72)}</h3>
-          </a>
+          </button>
         ))}
       </div>
+      {active ? <Player item={active} onClose={() => setActive(null)} /> : null}
     </div>
   );
 }

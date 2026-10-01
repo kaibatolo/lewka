@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState, type FormEvent } from "react";
 import { search, type Item } from "../lib/api";
 import { LEWKA_TAGS } from "../lib/tags";
+import { Player } from "./Player";
 
 const FEATURED = LEWKA_TAGS.slice(0, 16);
 
@@ -11,6 +12,7 @@ export function SearchPage() {
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
   const [more, setMore] = useState(false);
+  const [active, setActive] = useState<Item | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const chips = useMemo(() => (more ? LEWKA_TAGS : FEATURED), [more]);
@@ -28,7 +30,8 @@ export function SearchPage() {
       const data = await search(t, 24);
       const next = data.items || [];
       setItems(next);
-      setNote(`${next.length} hits · ${t}${(data.sources || []).length ? ` · ${data.sources?.join(", ")}` : ""}`);
+      const vids = next.filter((i) => i.kind === "video" || i.source === "eporner").length;
+      setNote(`${next.length} hits · ${vids} videos · ${t}`);
     } catch (err) {
       setItems([]);
       setNote(err instanceof Error ? err.message : "search missed");
@@ -46,7 +49,7 @@ export function SearchPage() {
     <div className={done ? "stage stage-results" : "stage"}>
       <form className="lewka-bar" onSubmit={onSubmit} role="search">
         <p className="mark">Lewka</p>
-        <h1 className="hero">find it. open it.</h1>
+        <h1 className="hero">find it. play it.</h1>
         <div className="row lewka-input">
           <input
             ref={inputRef}
@@ -79,14 +82,16 @@ export function SearchPage() {
       {done ? (
         <div className="grid">
           {items.map((item) => (
-            <a key={item.id} className="tile" href={item.url} target="_blank" rel="noopener noreferrer">
+            <button key={item.id} type="button" className="tile" onClick={() => setActive(item)}>
               {item.thumb ? <img src={item.thumb} alt="" /> : <div className="ph" />}
+              {item.kind === "video" || item.source === "eporner" ? <span className="play">play</span> : null}
               <p>{item.source}</p>
               <h3>{(item.title || item.id).slice(0, 80)}</h3>
-            </a>
+            </button>
           ))}
         </div>
       ) : null}
+      {active ? <Player item={active} onClose={() => setActive(null)} /> : null}
     </div>
   );
 }
