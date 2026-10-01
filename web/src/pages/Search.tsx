@@ -4,6 +4,7 @@ import { LEWKA_TAGS } from "../lib/tags";
 import { Player } from "./Player";
 
 const FEATURED = LEWKA_TAGS.slice(0, 16);
+const PRIORITY = ["reddit", "instagram", "erome", "xhamster", "pornhub", "chaturbate"];
 
 export function SearchPage({ onPlay }: { onPlay?: (on: boolean) => void }) {
   const [q, setQ] = useState("");
@@ -12,6 +13,7 @@ export function SearchPage({ onPlay }: { onPlay?: (on: boolean) => void }) {
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
   const [more, setMore] = useState(false);
+  const [want, setWant] = useState<string[]>(PRIORITY);
   const [active, setActive] = useState<Item | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -27,7 +29,7 @@ export function SearchPage({ onPlay }: { onPlay?: (on: boolean) => void }) {
     setQ(t);
     setDone(true);
     try {
-      const data = await federatedSearch(t, 24);
+      const data = await federatedSearch(t, 24, want);
       const next = data.items || [];
       setItems(next);
       const mix = Object.entries(
@@ -50,6 +52,10 @@ export function SearchPage({ onPlay }: { onPlay?: (on: boolean) => void }) {
   function onSubmit(e: FormEvent) {
     e.preventDefault();
     void run(q);
+  }
+
+  function toggleSource(name: string) {
+    setWant((cur) => (cur.includes(name) ? cur.filter((s) => s !== name) : [...cur, name]));
   }
 
   function open(item: Item) {
@@ -81,6 +87,13 @@ export function SearchPage({ onPlay }: { onPlay?: (on: boolean) => void }) {
           <button type="submit" disabled={busy}>
             {busy ? "Searching…" : "Open Lewka"}
           </button>
+        </div>
+        <div className="tags">
+          {PRIORITY.map((s) => (
+            <button key={s} type="button" className={want.includes(s) ? "tag on" : "tag"} onClick={() => toggleSource(s)}>
+              {s}
+            </button>
+          ))}
         </div>
         <div className="tags">
           {chips.map((h) => (
