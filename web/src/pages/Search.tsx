@@ -4,7 +4,7 @@ import { LEWKA_TAGS } from "../lib/tags";
 import { Player } from "./Player";
 
 const FEATURED = LEWKA_TAGS.slice(0, 16);
-const PRIORITY = ["reddit", "instagram", "erome", "xhamster", "pornhub", "chaturbate"];
+const PRIORITY = ["eporner", "pornhub", "redtube", "rule34"];
 
 export function SearchPage({ onPlay }: { onPlay?: (on: boolean) => void }) {
   const [q, setQ] = useState("");
