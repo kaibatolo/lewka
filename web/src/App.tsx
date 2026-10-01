@@ -1,11 +1,15 @@
+import { useState } from "react";
 import { SearchPage } from "./pages/Search";
 import { GalleryPage } from "./pages/Gallery";
+import { Ambient } from "./pages/Ambient";
 
 export function App() {
   const path = window.location.pathname.replace(/\/$/, "") || "/";
   const gallery = path === "/gallery" || path.endsWith("/gallery");
+  const [paused, setPaused] = useState(false);
   return (
     <div className="shell">
+      <Ambient paused={paused} />
       <header>
         <a href="/" className={gallery ? "" : "on"}>
           Lewka
@@ -14,7 +18,13 @@ export function App() {
           Gallery
         </a>
       </header>
-      <main>{gallery ? <GalleryPage /> : <SearchPage />}</main>
+      <main>
+        {gallery ? (
+          <GalleryPage onPlay={(on) => setPaused(on)} />
+        ) : (
+          <SearchPage onPlay={(on) => setPaused(on)} />
+        )}
+      </main>
     </div>
   );
 }

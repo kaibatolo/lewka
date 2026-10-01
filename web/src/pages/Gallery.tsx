@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { LANES, gallery, type Item } from "../lib/api";
+import { LANES, federate, gallery, type Item } from "../lib/api";
 import { Player } from "./Player";
 
-export function GalleryPage() {
+export function GalleryPage({ onPlay }: { onPlay?: (on: boolean) => void }) {
   const [lane, setLane] = useState<string>(LANES[0]);
   const [items, setItems] = useState<Item[]>([]);
   const [note, setNote] = useState("warming");
@@ -10,12 +10,12 @@ export function GalleryPage() {
 
   useEffect(() => {
     let live = true;
-    void gallery(lane, 24)
+    void gallery(lane, 80)
       .then((data) => {
         if (!live) return;
-        const next = data.items || [];
+        const next = federate(data.items || [], 24);
         setItems(next);
-        setNote(`${next.length} tiles · ${lane}`);
+        setNote(`${next.length} tiles · ${lane} · cap 20%`);
       })
       .catch((err: unknown) => {
         if (!live) return;
@@ -26,6 +26,16 @@ export function GalleryPage() {
       live = false;
     };
   }, [lane]);
+
+  function open(item: Item) {
+    setActive(item);
+    onPlay?.(true);
+  }
+
+  function close() {
+    setActive(null);
+    onPlay?.(false);
+  }
 
   return (
     <div>
@@ -40,7 +50,7 @@ export function GalleryPage() {
       </div>
       <div className="grid">
         {items.map((item) => (
-          <button key={item.id} type="button" className="tile" onClick={() => setActive(item)}>
+          <button key={item.id} type="button" className="tile" onClick={() => open(item)}>
             {item.thumb ? <img src={item.thumb} alt="" /> : <div className="ph" />}
             {item.kind === "video" || item.source === "eporner" ? <span className="play">play</span> : null}
             <p>{item.source}</p>
@@ -48,7 +58,7 @@ export function GalleryPage() {
           </button>
         ))}
       </div>
-      {active ? <Player item={active} onClose={() => setActive(null)} /> : null}
+      {active ? <Player item={active} onClose={close} /> : null}
     </div>
   );
 }

@@ -1,14 +1,14 @@
 import { useMemo, useRef, useState, type FormEvent } from "react";
-import { search, type Item } from "../lib/api";
+import { federatedSearch, type Item } from "../lib/api";
 import { LEWKA_TAGS } from "../lib/tags";
 import { Player } from "./Player";
 
 const FEATURED = LEWKA_TAGS.slice(0, 16);
 
-export function SearchPage() {
+export function SearchPage({ onPlay }: { onPlay?: (on: boolean) => void }) {
   const [q, setQ] = useState("");
   const [items, setItems] = useState<Item[]>([]);
-  const [note, setNote] = useState("uncensored adult index · type a lane");
+  const [note, setNote] = useState("federated index · 20% cap per source");
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
   const [more, setMore] = useState(false);
@@ -27,11 +27,18 @@ export function SearchPage() {
     setQ(t);
     setDone(true);
     try {
-      const data = await search(t, 24);
+      const data = await federatedSearch(t, 24);
       const next = data.items || [];
       setItems(next);
-      const vids = next.filter((i) => i.kind === "video" || i.source === "eporner").length;
-      setNote(`${next.length} hits · ${vids} videos · ${t}`);
+      const mix = Object.entries(
+        next.reduce<Record<string, number>>((acc, item) => {
+          acc[item.source] = (acc[item.source] || 0) + 1;
+          return acc;
+        }, {}),
+      )
+        .map(([src, n]) => `${src} ${n}`)
+        .join(" · ");
+      setNote(`${next.length} shown · ${mix || "empty"} · cap 20%`);
     } catch (err) {
       setItems([]);
       setNote(err instanceof Error ? err.message : "search missed");
@@ -43,6 +50,16 @@ export function SearchPage() {
   function onSubmit(e: FormEvent) {
     e.preventDefault();
     void run(q);
+  }
+
+  function open(item: Item) {
+    setActive(item);
+    onPlay?.(true);
+  }
+
+  function close() {
+    setActive(null);
+    onPlay?.(false);
   }
 
   return (
@@ -82,7 +99,7 @@ export function SearchPage() {
       {done ? (
         <div className="grid">
           {items.map((item) => (
-            <button key={item.id} type="button" className="tile" onClick={() => setActive(item)}>
+            <button key={item.id} type="button" className="tile" onClick={() => open(item)}>
               {item.thumb ? <img src={item.thumb} alt="" /> : <div className="ph" />}
               {item.kind === "video" || item.source === "eporner" ? <span className="play">play</span> : null}
               <p>{item.source}</p>
@@ -91,7 +108,7 @@ export function SearchPage() {
           ))}
         </div>
       ) : null}
-      {active ? <Player item={active} onClose={() => setActive(null)} /> : null}
+      {active ? <Player item={active} onClose={close} /> : null}
     </div>
   );
 }
