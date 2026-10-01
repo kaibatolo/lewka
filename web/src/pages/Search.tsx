@@ -1,14 +1,19 @@
-import { useRef, useState, type FormEvent } from "react";
+import { useMemo, useRef, useState, type FormEvent } from "react";
 import { search, type Item } from "../lib/api";
 import { LEWKA_TAGS } from "../lib/tags";
+
+const FEATURED = LEWKA_TAGS.slice(0, 16);
 
 export function SearchPage() {
   const [q, setQ] = useState("");
   const [items, setItems] = useState<Item[]>([]);
-  const [note, setNote] = useState("Adult index. 62 tags live. Type a lane and open Lewka.");
+  const [note, setNote] = useState("uncensored adult index · type a lane");
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
+  const [more, setMore] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const chips = useMemo(() => (more ? LEWKA_TAGS : FEATURED), [more]);
 
   async function run(term: string) {
     const t = term.trim();
@@ -38,9 +43,10 @@ export function SearchPage() {
   }
 
   return (
-    <div>
+    <div className={done ? "stage stage-results" : "stage"}>
       <form className="lewka-bar" onSubmit={onSubmit} role="search">
         <p className="mark">Lewka</p>
+        <h1 className="hero">find it. open it.</h1>
         <div className="row lewka-input">
           <input
             ref={inputRef}
@@ -57,11 +63,16 @@ export function SearchPage() {
           </button>
         </div>
         <div className="tags">
-          {LEWKA_TAGS.map((h) => (
+          {chips.map((h) => (
             <button key={h} type="button" className={q === h ? "tag on" : "tag"} onClick={() => void run(h)}>
               {h}
             </button>
           ))}
+          {LEWKA_TAGS.length > FEATURED.length ? (
+            <button type="button" className="tag more" onClick={() => setMore((v) => !v)}>
+              {more ? "less" : `+${LEWKA_TAGS.length - FEATURED.length}`}
+            </button>
+          ) : null}
         </div>
         <p className="meta">{note}</p>
       </form>
